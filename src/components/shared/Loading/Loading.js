@@ -1,11 +1,11 @@
 import React from "react";
 
-function Dashboard() {
+function Loading() {
     return (
         <div>
-            <h1>Dashboard</h1>
+            <h1>LOADING</h1>
         </div>
     );
 };
 
-export default Dashboard;
+export default Loading;
