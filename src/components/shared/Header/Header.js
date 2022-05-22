@@ -15,10 +15,12 @@ function Header({ children }) {
                             </label>
                         </div>
                         <div className="flex-none hidden lg:block">
-                            <ul className="menu menu-horizontal gap-x-3">
+                            <ul className="menu menu-horizontal gap-x-1">
                                 <li><NavLink to='/' className='rounded-md font-medium'>HOME</NavLink></li>
                                 <li><NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink></li>
-                                <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN/REGISTER</NavLink></li>
+                                <li><NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink></li>
+                                <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink></li>
+                                <li><NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink></li>
                             </ul>
                         </div>
                     </div>
@@ -26,10 +28,12 @@ function Header({ children }) {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                    <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
+                    <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 fixed top-0">
                         <li><NavLink to='/' className='rounded-md font-medium'>HOME</NavLink></li>
                         <li><NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink></li>
-                        <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN/REGISTER</NavLink></li>
+                        <li><NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink></li>
+                        <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink></li>
+                        <li><NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink></li>
                     </ul>
                 </div>
             </div>
