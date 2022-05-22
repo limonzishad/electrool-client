@@ -1,6 +1,6 @@
 import React from "react";
 
-function Portfolio() {
+const Portfolio = () => {
     return (
         <div>
 

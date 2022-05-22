@@ -1,7 +1,14 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from "firebase/auth";
 import { NavLink } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
-function Header({ children }) {
+const Header = ({ children }) => {
+    const [user] = useAuthState(auth);
+    const handleLogout = () => {
+        signOut(auth);
+    };
     return (
         <div>
             <div className="drawer drawer-end">
@@ -17,10 +24,41 @@ function Header({ children }) {
                         <div className="flex-none hidden lg:block">
                             <ul className="menu menu-horizontal gap-x-1">
                                 <li><NavLink to='/' className='rounded-md font-medium'>HOME</NavLink></li>
-                                <li><NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink></li>
-                                <li><NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink></li>
-                                <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink></li>
-                                <li><NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink></li>
+                                {
+                                    user ?
+                                        <>
+                                            <li>
+                                                <NavLink to='/dashboard' className='rounded-md font-medium'>DASHBOARD</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/purchase' className='rounded-md font-medium'>PURCHASE</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to="/login" onClick={handleLogout} className='rounded-md font-medium'>LOGOUT</NavLink>
+                                            </li>
+                                        </>
+                                        :
+                                        <>
+                                            <li>
+                                                <NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink>
+                                            </li>
+                                        </>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -30,10 +68,41 @@ function Header({ children }) {
                     <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 fixed top-0">
                         <li><NavLink to='/' className='rounded-md font-medium'>HOME</NavLink></li>
-                        <li><NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink></li>
-                        <li><NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink></li>
-                        <li><NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink></li>
-                        <li><NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink></li>
+                        {
+                            user ?
+                                <>
+                                    <li>
+                                        <NavLink to='/dashboard' className='rounded-md font-medium'>DASHBOARD</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/purchase' className='rounded-md font-medium'>PURCHASE</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/login" onClick={handleLogout} className='rounded-md font-medium'>LOGOUT</NavLink>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink to='/blogs' className='rounded-md font-medium'>BLOGS</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/portfolio' className='rounded-md font-medium'>MY PORTFOLIO</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/login' className='rounded-md font-medium'>LOGIN</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/register' className='rounded-md font-medium'>REGISTER</NavLink>
+                                    </li>
+                                </>
+                        }
                     </ul>
                 </div>
             </div>

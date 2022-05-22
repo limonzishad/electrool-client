@@ -1,6 +1,6 @@
 import React from "react";
 
-function Purchase() {
+const Purchase = () => {
     return (
         <div>
             <h1>Purchase</h1>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function UnknownRoute() {
+const UnknownRoute = () => {
     return (
         <div>
             <h1>UnknownRoute</h1>

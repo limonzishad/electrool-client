@@ -1,7 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from '../../../firebase.init';
 
-function Login() {
+const Login = () => {
+
+    // continue with google
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || '/';
+    let errorMessage;
+    let loadingMessage;
+
+    if (error) {
+        errorMessage = <div>
+            <p className="text-red-500 mt-2">Error: {error.message}</p>
+        </div>
+    }
+
+    if (loading) {
+        loadingMessage = <p className="text-indigo-500 mt-2">Loading...</p>;
+    }
+
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [user]);
+
     return (
         <div className="h-screen flex justify-center items-center bg-base-200">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -18,6 +45,8 @@ function Login() {
                             <span className="label-text font-medium">Password</span>
                         </label>
                         <input type="password" placeholder="Password" className="input input-bordered" required />
+                        {errorMessage}
+                        {loadingMessage}
                         <label className="label mt-2">
                             <p className="text-md">Don't have an account? <Link to="/register" className="label-text-alt link link-hover text-primary text-md font-medium">REGISTER</Link></p>
                         </label>
@@ -29,7 +58,7 @@ function Login() {
                         <button className="btn btn-primary font-medium">LOGIN</button>
                     </div>
                     <div className="divider">OR</div>
-                    <button className="btn btn-glass hover:btn-accent">CONTINUE WITH GOOGLE</button>
+                    <button onClick={() => { signInWithGoogle() }} className="btn btn-glass hover:btn-accent">CONTINUE WITH GOOGLE</button>
                 </div>
             </div>
         </div>
