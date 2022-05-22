@@ -7,6 +7,7 @@ import Blogs from './components/pages/Blogs/Blogs';
 import Portfolio from './components/pages/Portfolio/Portfolio';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
+import UnknownRoute from './components/pages/UnknownRoute/UnknownRoute';
 import RequireAuth from './components/pages/RequireAuth/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/portfolio' element={<Portfolio />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
+        <Route path='*' element={<UnknownRoute />}></Route>
       </Routes>
     </Header>
   );

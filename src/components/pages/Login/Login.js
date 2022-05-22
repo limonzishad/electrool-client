@@ -10,7 +10,6 @@ const Login = () => {
     const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] = useSignInWithEmailAndPassword(auth);
 
     const onSubmit = data => {
-        console.log(data);
         signInWithEmailAndPassword(data.email, data.password);
     };
 
@@ -65,9 +64,6 @@ const Login = () => {
                             {loadingMessage}
                             <label className="label mt-2">
                                 <p className="text-md">Don't have an account? <Link to="/register" className="label-text-alt link link-hover text-primary text-md font-medium">REGISTER</Link></p>
-                            </label>
-                            <label className="label">
-                                <p className="text-md">Forgot password? <Link to="" className="label-text-alt link link-hover text-primary text-md font-medium">RESET PASSWORD</Link></p>
                             </label>
                         </div>
                         <div className="form-control mt-2">

@@ -3,8 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useSendEmailVerification } from "react-firebase-hooks/auth";
 import auth from '../../../firebase.init';
-// import { useCreateUserWithEmailAndPassword, sendEmailVerification,  } from 'react-firebase-hooks/auth';
-// import auth from "../../../firebase.init";
 // import { ToastContainer } from 'react-toastify';
 
 const Register = () => {
@@ -13,10 +11,9 @@ const Register = () => {
     const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] = useCreateUserWithEmailAndPassword(auth);
     const [sendEmailVerification] = useSendEmailVerification(auth);
 
-    const onSubmit = data => {
-        console.log(data);
-        createUserWithEmailAndPassword(data.email, data.password);
-        sendEmailVerification();
+    const onSubmit = async (data) => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await sendEmailVerification();
     };
 
     // continue with google
