@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useSendEmailVerification } from "react-firebase-hooks/auth";
+import useToken from '../../../hooks/useToken';
 import auth from '../../../firebase.init';
 // import { ToastContainer } from 'react-toastify';
 
@@ -18,6 +19,9 @@ const Register = () => {
 
     // continue with google
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    // save user
+    const [token] = useToken(emailUser || googleUser);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,10 +40,10 @@ const Register = () => {
     }
 
     useEffect(() => {
-        if (emailUser || googleUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [emailUser, googleUser, from, navigate]);
+    }, [token, from, navigate]);
 
     return (
         <div className="h-screen flex justify-center items-center bg-base-200">
