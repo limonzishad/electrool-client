@@ -8,7 +8,9 @@ const Header = ({ children }) => {
     const [user] = useAuthState(auth);
     const handleLogout = () => {
         signOut(auth);
+        localStorage.removeItem('accessToken');
     };
+
     return (
         <div>
             <div className="drawer drawer-end">
