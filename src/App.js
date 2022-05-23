@@ -2,6 +2,13 @@ import './App.css';
 import Header from './components/shared/Header/Header';
 import Home from './components/pages/Home/Home';
 import Dashboard from './components/pages/Dashboard/Dashboard';
+import AllProducts from './components/pages/Products/AllProducts';
+import AddProduct from './components/pages/Dashboard/AddProduct';
+import AddReview from './components/pages/Dashboard/AddReview';
+import ManageOrders from './components/pages/Dashboard/ManageOrders';
+import ManageProducts from './components/pages/Dashboard/ManageProducts';
+import MyOrders from './components/pages/Dashboard/MyOrders';
+import MyProfile from './components/pages/Dashboard/MyProfile';
 import Purchase from './components/pages/Purchase/Purchase';
 import Blogs from './components/pages/Blogs/Blogs';
 import Portfolio from './components/pages/Portfolio/Portfolio';
@@ -19,11 +26,23 @@ const App = () => {
         <Route path='/dashboard' element={
           <RequireAuth>
             <Dashboard />
-          </RequireAuth>}></Route>
-        <Route path='/purchase' element={
+          </RequireAuth>}>
+          <Route index element={<MyOrders />}></Route>
+          <Route path='addreview' element={<AddReview />}></Route>
+          <Route path='addproducts' element={<AddProduct />}></Route>
+          <Route path='manageorders' element={<ManageOrders />}></Route>
+          <Route path='manageproducts' element={<ManageProducts />}></Route>
+          <Route path='myorders' element={<MyOrders />}></Route>
+          <Route path='myprofile' element={<MyProfile />}></Route>
+        </Route>
+
+        <Route path="/purchase/:id" element={
           <RequireAuth>
             <Purchase />
-          </RequireAuth>}></Route>
+          </RequireAuth>}>
+        </Route>
+
+        <Route path='/products' element={<AllProducts />}></Route>
         <Route path='/blogs' element={<Blogs />}></Route>
         <Route path='/portfolio' element={<Portfolio />}></Route>
         <Route path='/login' element={<Login />}></Route>
