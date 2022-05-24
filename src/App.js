@@ -23,6 +23,7 @@ const App = () => {
     <Header>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+
         <Route path='/dashboard' element={
           <RequireAuth>
             <Dashboard />

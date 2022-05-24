@@ -89,6 +89,7 @@ const Register = () => {
                             <button type="submit" className="btn btn-primary font-medium">SUBMIT</button>
                         </div>
                     </form>
+
                     <div className="divider">OR</div>
                     <button onClick={() => { signInWithGoogle() }} className="btn btn-outline hover:btn-primary">CONTINUE WITH GOOGLE</button>
                 </div>
