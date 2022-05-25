@@ -11,7 +11,7 @@ const Purchase = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { name, img, description, pricePerUnit, quantity, availability, ratings, minOrder } = product;
     useEffect(() => {
-        const url = `http://localhost:5000/purchase/${id}`;
+        const url = `https://murmuring-ocean-75671.herokuapp.com/purchase/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setProduct(data));
@@ -19,7 +19,7 @@ const Purchase = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        // const url = `http://localhost:5000/product`;
+        // const url = `https://murmuring-ocean-75671.herokuapp.com/product`;
         // fetch(url, {
         //     method: 'POST',
         //     headers: {

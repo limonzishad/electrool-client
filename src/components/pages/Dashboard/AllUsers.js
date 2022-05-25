@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import Loading from "../../shared/Loading/Loading";
 
 const AllUsers = () => {
-    const { data: users, isLoading } = useQuery('users', () => fetch('http://localhost:5000/users', {
+    const { data: users, isLoading } = useQuery('users', () => fetch('https://murmuring-ocean-75671.herokuapp.com/users', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -15,7 +15,7 @@ const AllUsers = () => {
     let serial = 1;
 
     const makeAdmin = (email) => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://murmuring-ocean-75671.herokuapp.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -23,7 +23,6 @@ const AllUsers = () => {
         })
             .then(res => res.json())
             .then(result => {
-
             });
     }
 

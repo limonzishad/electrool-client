@@ -5,18 +5,15 @@ const ManageProducts = () => {
     const [products, setProduct] = useProduct();
     let serial = 1;
     const deleteProduct = (id) => {
-        const proceed = window.confirm('Are you sure?');
-        if (proceed) {
-            const url = `http://localhost:5000/product/${id}`;
-            fetch(url, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const remainingProducts = products.filter(product => product._id !== id);
-                    setProduct(remainingProducts);
-                });
-        }
+        const url = `https://murmuring-ocean-75671.herokuapp.com/product/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                const remainingProducts = products.filter(product => product._id !== id);
+                setProduct(remainingProducts);
+            });
     };
 
     return (
@@ -43,10 +40,22 @@ const ManageProducts = () => {
                                     <td className="text-center">{product.quantity}</td>
                                     <td className="text-center">{product.pricePerUnit}</td>
                                     <td className="text-center">{product.availability}</td>
-                                    <td><button onClick={() => { deleteProduct(product._id) }} className="btn btn-circle btn-outline hover:bg-red-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                                    </button></td>
+                                    <td>
+                                        <label htmlFor="delete-modal" className="btn bg-red-600 modal-button">DELETE</label>
+                                        <input type="checkbox" id="delete-modal" className="modal-toggle" />
+                                        <div className="modal modal-bottom sm:modal-middle">
+                                            <div className="modal-box">
+                                                <label htmlFor="delete-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                <h3 className="font-bold text-lg">Are you sure want to delete {product.name} ?</h3>
+                                                <div className="modal-action">
+                                                    <button htmlFor="delete-modal" onClick={() => { deleteProduct(product._id) }} className="btn modal-button btn-outline hover:bg-red-600">CONFIRM
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
+
                             )
                         }
                     </tbody>
