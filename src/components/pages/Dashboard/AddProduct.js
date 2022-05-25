@@ -1,11 +1,8 @@
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import auth from "../../../firebase.init";
 
 const AddProduct = () => {
-    const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
@@ -79,7 +76,7 @@ const AddProduct = () => {
                                     <label className="label">
                                         <span className="label-text font-medium">Availability</span>
                                     </label>
-                                    <input type="text" placeholder="Product quantity" className="input input-bordered"
+                                    <input type="text" placeholder="Type 'Yes' or 'No'" className="input input-bordered"
                                         {...register("availability", { required: true })} />
                                     {errors.availability?.type === 'required' && <span className="text-red-500 mt-2">Availability field is empty.</span>}
                                 </div>

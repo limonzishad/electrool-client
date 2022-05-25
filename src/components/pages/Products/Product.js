@@ -15,15 +15,11 @@ const Product = ({ product }) => {
                 <p className="font-medium text-justify">Description: {description}</p>
                 <p className="font-medium">Quantity: <span className="text-secondary">{quantity}</span></p>
                 <p className="font-medium">Price per Unit: <span className="text-secondary text-xl">${pricePerUnit}</span></p>
-                <p className="font-medium">Available: <span className="text-black text-lg">{availability ? "Yes" : "No"}</span></p>
+                <p className="font-medium">Available: <span className="text-black text-lg">{availability}</span></p>
                 <p className="font-medium text-center">Ratings: <span className="text-black text-lg">{ratings}</span></p>
+
                 <div className="card-actions justify-end">
-                    {
-                        availability ?
-                            <button onClick={() => { showProductDetails(_id) }} className="w-full mx-auto btn btn-primary">ORDER</button>
-                            :
-                            <button className="w-full mx-auto btn btn-primary cursor-not-allowed">ORDER</button>
-                    }
+                    <button onClick={() => { showProductDetails(_id) }} className="w-full mx-auto btn btn-primary" disabled={availability === 'No'}>PURCHASE</button>
                 </div>
             </div>
         </div >

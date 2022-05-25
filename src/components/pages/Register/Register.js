@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useSendEmailVerification } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useSendEmailVerification, useUpdateProfile } from "react-firebase-hooks/auth";
 import useToken from '../../../hooks/useToken';
 import auth from '../../../firebase.init';
 // import { ToastContainer } from 'react-toastify';
@@ -15,6 +15,7 @@ const Register = () => {
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await sendEmailVerification();
+        await updateProfile({ displayName: data.name });
     };
 
     // continue with google
@@ -23,19 +24,22 @@ const Register = () => {
     // save user
     const [token] = useToken(emailUser || googleUser);
 
+    // update user profile
+    const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
+
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
     let errorMessage;
     let loadingMessage;
 
-    if (emailError || googleError) {
+    if (emailError || googleError || updatingError) {
         errorMessage = <div>
             <p className="text-red-500 mt-2">Error: {emailError?.message || googleError?.message}</p>
         </div>
     }
 
-    if (emailLoading || googleLoading) {
+    if (emailLoading || googleLoading || updating) {
         loadingMessage = <p className="text-indigo-500 mt-2">Loading...</p>;
     }
 

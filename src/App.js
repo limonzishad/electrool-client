@@ -17,6 +17,7 @@ import Register from './components/pages/Register/Register';
 import UnknownRoute from './components/pages/UnknownRoute/UnknownRoute';
 import RequireAuth from './components/pages/RequireAuth/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
+import AllUsers from './components/pages/Dashboard/AllUsers';
 
 const App = () => {
   return (
@@ -29,12 +30,13 @@ const App = () => {
             <Dashboard />
           </RequireAuth>}>
           <Route index element={<MyOrders />}></Route>
-          <Route path='addreview' element={<AddReview />}></Route>
-          <Route path='addproducts' element={<AddProduct />}></Route>
-          <Route path='manageorders' element={<ManageOrders />}></Route>
-          <Route path='manageproducts' element={<ManageProducts />}></Route>
-          <Route path='myorders' element={<MyOrders />}></Route>
-          <Route path='myprofile' element={<MyProfile />}></Route>
+          <Route path='add-review' element={<AddReview />}></Route>
+          <Route path='add-products' element={<AddProduct />}></Route>
+          <Route path='manage-orders' element={<ManageOrders />}></Route>
+          <Route path='manage-products' element={<ManageProducts />}></Route>
+          <Route path='my-orders' element={<MyOrders />}></Route>
+          <Route path='my-profile' element={<MyProfile />}></Route>
+          <Route path='all-users' element={<AllUsers />}></Route>
         </Route>
 
         <Route path="/purchase/:id" element={
