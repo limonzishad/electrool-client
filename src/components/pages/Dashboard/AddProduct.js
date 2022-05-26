@@ -18,7 +18,7 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(result => {
             })
-        navigate('/dashboard/manageproducts');
+        navigate('/dashboard/manage-products');
     };
 
     return (

@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Product from "../Products/Product";
 import setProduct from "../../../hooks/useProduct";
+import setReview from "../../../hooks/useReview";
+import Review from "../Review/Review";
 
 const Home = () => {
     const [products] = setProduct();
+    const [reviews] = setReview();
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
@@ -16,42 +19,55 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
             {/* products */}
-            <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 bg-base-200">
-                {
-                    products.slice(0, 3).map(product => <Product key={product._id} product={product}></Product>)
-                }
-            </div>
-            {/* summary */}
-            <div className="flex justify-center items-center bg-base-200">
-                <div className="stats stats-vertical lg:stats-horizontal shadow-lg">
-
-                    <div className="stat">
-                        <div className="stat-title">PRODUCTS</div>
-                        <div className="stat-value">100K</div>
-                        <div className="stat-desc">Jan 1st - Dec 31st</div>
-                    </div>
-
-                    <div className="stat">
-                        <div className="stat-title">New Users</div>
-                        <div className="stat-value">1500</div>
-                        <div className="stat-desc">↗︎ 150 (32%)</div>
-                    </div>
-
-                    <div className="stat">
-                        <div className="stat-title">New Registers</div>
-                        <div className="stat-value">800</div>
-                        <div className="stat-desc">↘︎ 90 (24%)</div>
-                    </div>
-
+            <div className="bg-base-200">
+                <h1 className="text-3xl font-semibold text-center">OUR PRODUCTS</h1>
+                <div className="px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 bg-base-200">
+                    {
+                        products.slice(0, 3).map(product => <Product key={product._id} product={product}></Product>)
+                    }
                 </div>
             </div>
-            {/* review */}
-            <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 bg-base-200">
-                {
-                    products.map(product => <Product key={product._id} product={product}></Product>)
-                }
+
+            {/* summary */}
+            <div className="bg-base-200 p-5">
+                <h1 className="text-3xl font-semibold text-center">BUSINESS SUMMARY</h1>
+                <div className="flex justify-center items-center bg-base-200 pt-5">
+                    <div className="stats stats-vertical lg:stats-horizontal shadow-lg">
+
+                        <div className="stat">
+                            <div className="stat-title">PRODUCTS</div>
+                            <div className="stat-value">100K</div>
+                            <div className="stat-desc">Jan 1st - Dec 31st</div>
+                        </div>
+
+                        <div className="stat">
+                            <div className="stat-title">New Users</div>
+                            <div className="stat-value">1500</div>
+                            <div className="stat-desc">↗︎ 150 (32%)</div>
+                        </div>
+
+                        <div className="stat">
+                            <div className="stat-title">New Registers</div>
+                            <div className="stat-value">800</div>
+                            <div className="stat-desc">↘︎ 90 (24%)</div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
+            {/* review */}
+            <div className="bg-base-200 pt-10">
+                <h1 className="text-3xl font-semibold text-center">CUSTOMER REVIEWS</h1>
+                <div className="px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 bg-base-200 pb-14">
+                    {
+                        reviews.map(review => <Review key={review._id} review={review}></Review>)
+                    }
+                </div>
+            </div>
+
             {/* footer */}
             <footer className="footer footer-center p-10 bg-base-300 text-base-content rounded">
                 <div className="text-black font-medium grid grid-flow-col gap-4">
