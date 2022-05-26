@@ -20,7 +20,6 @@ const Purchase = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
         const url = `https://murmuring-ocean-75671.herokuapp.com/order`;
         fetch(url, {
             method: 'POST',
@@ -47,7 +46,7 @@ const Purchase = () => {
                     <p className="font-medium">Price per Unit: <span className="text-secondary text-xl">${pricePerUnit}</span></p>
                     <p className="font-medium">Available: <span className="text-black text-lg">{availability ? "Yes" : "No"}</span></p>
                     <p className="font-medium text-center">Ratings: <span className="text-black text-lg">{ratings}</span></p>
-                    <div className="divider">OR</div>
+                    <div className="divider">AND</div>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="text-center mt-5 text-xl font-bold">FILL THIS FORM TO ORDER</h1>
@@ -83,20 +82,7 @@ const Purchase = () => {
                                 {...register("phone", { required: true })} />
                             {errors.phone?.type === 'required' && <span className="text-red-500 mt-2">Phone/Mobile field is empty.</span>}
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-medium">Product Name</span>
-                            </label>
-                            <input type="text" className="input input-bordered" value={name}
-                                {...register("productName", { required: true })} readOnly />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-medium">Product Price (Per Unit)</span>
-                            </label>
-                            <input type="text" className="input input-bordered" value={pricePerUnit}
-                                {...register("productPricePerUnit", { required: true })} readOnly />
-                        </div>
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-medium">Order quantity</span>

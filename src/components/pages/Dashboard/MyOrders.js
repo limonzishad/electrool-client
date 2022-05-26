@@ -24,9 +24,8 @@ const MyOrders = () => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>PRODUCT NAME</th>
+                            <th>PRODUCT ID</th>
                             <th className="text-center">ORDER QUANTITY</th>
-                            <th className="text-center">PRICE (PER UNIT)</th>
                             <th className="text-center"></th>
                             <th className="text-center"></th>
                         </tr>
@@ -36,11 +35,23 @@ const MyOrders = () => {
                             orders.map(order =>
                                 <tr key={order._id}>
                                     <th>{serial++}</th>
-                                    <td>{order.productName}</td>
+                                    <td>{order._id}</td>
                                     <td className="text-center">{order.orderQuantity}</td>
-                                    <td className="text-center">{order.productPricePerUnit}</td>
                                     <td>
-                                        <label htmlFor="delete-modal" className="btn bg-red-600 modal-button">DELETE</label>
+                                        <label htmlFor="pay-modal" className="btn bg-green-600 modal-button">PAY</label>
+                                        <input type="checkbox" id="pay-modal" className="modal-toggle" />
+                                        <div className="modal modal-bottom sm:modal-middle">
+                                            <div className="modal-box">
+                                                <label htmlFor="pay-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                                <h3 className="font-bold text-lg">Thank you for the payment!</h3>
+                                                <div className="modal-action">
+                                                    <button htmlFor="pay-modal" className="btn modal-button btn-outline hover:bg-green-600">CONFIRM PAYMENT</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label htmlFor="delete-modal" className="btn bg-red-600 modal-button">CANCEL</label>
                                         <input type="checkbox" id="delete-modal" className="modal-toggle" />
                                         <div className="modal modal-bottom sm:modal-middle">
                                             <div className="modal-box">

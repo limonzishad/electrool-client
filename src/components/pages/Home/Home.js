@@ -10,11 +10,12 @@ const Home = () => {
     const [reviews] = setReview();
     return (
         <div>
+            {/* banner */}
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img src="https://img.freepik.com/free-vector/banner-electric-construction-tools_80590-3707.jpg" alt="hero section" className="max-w-sm rounded-lg shadow-2xl" />
+                    <img src="https://img.freepik.com/free-vector/banner-electric-construction-tools_80590-3707.jpg" alt="hero section" className="w-52 md:w-72 lg:w-full rounded-lg shadow-2xl" />
                     <div>
-                        <h1 className="text-5xl font-bold">We Produce the Best Ones.</h1>
+                        <h1 className="text-4xl font-bold">We Produce the Best Ones.</h1>
                         <p className="py-6">Providing best electric tool is our motto and satisfying customer is our earnings. To full fill customer need we are manufacturing the best tool for electric uses.</p>
                     </div>
                 </div>
@@ -68,13 +69,50 @@ const Home = () => {
                 </div>
             </div>
 
+            {/* visit section */}
+            <div>
+                <div className="hero min-h-screen bg-base-200">
+                    <div className="w-52 md:w-72 lg:w-full hero-content flex-col lg:flex-row">
+                        <img src="http://www.bjbanner.com/uploadfile/2015/0827/20150827101611979.jpg" alt="factory" className="rounded-lg shadow-2xl" />
+                        <div>
+                            <h1 className="text-5xl font-bold">VISIT TO US</h1>
+                            <p className="py-6">We are excited to let you know that we organized a industrial visit. Which means you can visit our factory. If you are interested than you can submit a request to us.</p>
+                            <button className="btn btn-primary">SUBMIT REQUEST</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* news teller */}
+            <div>
+                <div className="hero min-h-screen bg-base-200">
+                    <div className="w-52 md:w-72 lg:w-full hero-content flex-col lg:flex-row-reverse">
+                        <div className="text-center lg:text-left">
+                            <h1 className="text-4xl font-bold">SUBSCRIBE NOW</h1>
+                            <p className="py-6">Subscribe to our news teller feature to get all the updates. And it is 100% free. So, let's do this.</p>
+                        </div>
+                        <div className="card flex-shrink-0 w-52 md:w-72 lg:w-full max-w-sm shadow-2xl bg-base-100">
+                            <div className="card-body">
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Email</span>
+                                    </label>
+                                    <input type="text" placeholder="email" className="input input-bordered" />
+                                </div>
+                                <div className="form-control mt-6">
+                                    <button className="btn btn-primary">SUBSCRIBE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* footer */}
             <footer className="footer footer-center p-10 bg-base-300 text-base-content rounded">
                 <div className="text-black font-medium grid grid-flow-col gap-4">
                     <Link to='/' className="link link-hover">HOME</Link>
                     <Link to='/products' className="link link-hover">PRODUCTS</Link>
-                    <Link to='/login' className="link link-hover">LOGIN</Link>
-                    <Link to='/register' className="link link-hover">REGISTER</Link>
                 </div>
                 <div>
                     <div className="grid grid-flow-col gap-4">
