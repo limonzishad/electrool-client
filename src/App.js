@@ -29,7 +29,6 @@ const App = () => {
           <RequireAuth>
             <Dashboard />
           </RequireAuth>}>
-          <Route index element={<MyOrders />}></Route>
           <Route path='add-review' element={<AddReview />}></Route>
           <Route path='add-products' element={<AddProduct />}></Route>
           <Route path='manage-orders' element={<ManageOrders />}></Route>

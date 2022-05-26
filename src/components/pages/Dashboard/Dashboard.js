@@ -1,7 +1,13 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, Outlet } from "react-router-dom";
+import auth from "../../../firebase.init";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
+
     return (
         <div>
             <div className="drawer drawer-mobile">
@@ -14,13 +20,13 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-3 overflow-y-auto w-48 bg-base-100 text-base-content gap-y-2">
-                        <li><NavLink to="/dashboard/my-orders">MY ORDERS</NavLink></li>
-                        <li><NavLink to="/dashboard/add-products">ADD PRODUCT</NavLink></li>
-                        <li><NavLink to="/dashboard/add-review">ADD REVIEW</NavLink></li>
-                        <li><NavLink to="/dashboard/manage-orders">MANAGE ORDERS</NavLink></li>
-                        <li><NavLink to="/dashboard/manage-products">MANAGE PRODUCTS</NavLink></li>
+                        {!admin && <li><NavLink to="/dashboard/my-orders">MY ORDERS</NavLink></li>}
+                        {admin && <li><NavLink to="/dashboard/add-products">ADD PRODUCT</NavLink></li>}
+                        {!admin && <li><NavLink to="/dashboard/add-review">ADD REVIEW</NavLink></li>}
+                        {admin && <li><NavLink to="/dashboard/manage-orders">MANAGE ORDERS</NavLink></li>}
+                        {admin && <li><NavLink to="/dashboard/manage-products">MANAGE PRODUCTS</NavLink></li>}
                         <li><NavLink to="/dashboard/my-profile">MY PROFILE</NavLink></li>
-                        <li><NavLink to="/dashboard/all-users">ALL USERS</NavLink></li>
+                        {admin && <li><NavLink to="/dashboard/all-users">ALL USERS</NavLink></li>}
                     </ul>
                 </div>
             </div>

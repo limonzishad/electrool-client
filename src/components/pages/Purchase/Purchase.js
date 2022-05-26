@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import auth from "../../../firebase.init";
 
 const Purchase = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { name, img, description, pricePerUnit, quantity, availability, ratings, minOrder } = product;
+
     useEffect(() => {
         const url = `https://murmuring-ocean-75671.herokuapp.com/purchase/${id}`;
         fetch(url)
@@ -19,19 +21,19 @@ const Purchase = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        // const url = `https://murmuring-ocean-75671.herokuapp.com/product`;
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        //     .then(res => res.json())
-        //     .then(result => {
-        //         console.log(result);
-        //     })
-        // //navigate('/dashboard/manageproducts');
+        const url = `https://murmuring-ocean-75671.herokuapp.com/order`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result => {
+            })
+        navigate('/dashboard/my-orders');
     };
 
     return (
@@ -51,7 +53,7 @@ const Purchase = () => {
                         <h1 className="text-center mt-5 text-xl font-bold">FILL THIS FORM TO ORDER</h1>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text font-medium">Name</span>
+                                <span className="label-text font-medium">Customer Name</span>
                             </label>
                             <input type="text" placeholder="Customer name" className="input input-bordered"
                                 {...register("customerName", { required: true })} />
@@ -71,7 +73,7 @@ const Purchase = () => {
                             </label>
                             <input type="text" placeholder="Customer address" className="input input-bordered"
                                 {...register("address", { required: true })} />
-                            {errors.address?.type === 'required' && <span className="text-red-500 mt-2">Price (Per Unit) field is empty.</span>}
+                            {errors.address?.type === 'required' && <span className="text-red-500 mt-2">Address field is empty.</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -79,7 +81,21 @@ const Purchase = () => {
                             </label>
                             <input type="text" placeholder="Phone/Mobile number" className="input input-bordered"
                                 {...register("phone", { required: true })} />
-                            {errors.phone?.type === 'required' && <span className="text-red-500 mt-2">Quantity field is empty.</span>}
+                            {errors.phone?.type === 'required' && <span className="text-red-500 mt-2">Phone/Mobile field is empty.</span>}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-medium">Product Name</span>
+                            </label>
+                            <input type="text" className="input input-bordered" value={name}
+                                {...register("productName", { required: true })} readOnly />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-medium">Product Price (Per Unit)</span>
+                            </label>
+                            <input type="text" className="input input-bordered" value={pricePerUnit}
+                                {...register("productPricePerUnit", { required: true })} readOnly />
                         </div>
                         <div className="form-control">
                             <label className="label">

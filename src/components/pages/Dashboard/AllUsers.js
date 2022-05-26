@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import Loading from "../../shared/Loading/Loading";
 
 const AllUsers = () => {
-    const { data: users, isLoading } = useQuery('users', () => fetch('https://murmuring-ocean-75671.herokuapp.com/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://murmuring-ocean-75671.herokuapp.com/users', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -23,6 +23,7 @@ const AllUsers = () => {
         })
             .then(res => res.json())
             .then(result => {
+                refetch();
             });
     }
 
@@ -41,7 +42,8 @@ const AllUsers = () => {
                             <tr key={user._id}>
                                 <th>{serial++}</th>
                                 <td className="text-center text-lg">{user.email}</td>
-                                <td>{<button disabled={user.role === 'admin'} onClick={() => makeAdmin(user.email)} className="btn btn-xs hover:bg-green-500">Make Admin</button>}</td>
+                                <td>{user.role !== 'admin' ? <button onClick={() => makeAdmin(user.email)} className="btn btn-xs hover:bg-green-500">Make Admin</button>
+                                    : <button disabled className="btn btn-xs hover:bg-green-500">Already an Admin</button>}</td>
                             </tr>
                         )
                     }
